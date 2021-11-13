@@ -27,7 +27,7 @@ describe('Component: User', () => {
 
   it('should use the user name from the service', () => {
     const { fixture, app } = getFixtureAndApp();
-    let userService = fixture.debugElement.injector.get(UserService);
+    const userService = fixture.debugElement.injector.get(UserService);
     fixture.detectChanges(); // we need to update the changes
     expect(userService.user.name).toEqual(app.user.name);
   });
@@ -37,15 +37,15 @@ describe('Component: User', () => {
 
     app.isLoggedIn = true;
     fixture.detectChanges();
-    let compiled = fixture.debugElement.nativeElement;
+    const compiled = fixture.debugElement.nativeElement;
     expect(compiled.querySelector('p').textContent).toContain(app.user.name);
   });
 
-  it("shouldn't display the user name if user is not logged in", () => {
+  it(`shouldn't display the user name if user is not logged in`, () => {
     const { fixture, app } = getFixtureAndApp();
 
     fixture.detectChanges();
-    let compiled = fixture.debugElement.nativeElement;
+    const compiled = fixture.debugElement.nativeElement;
     expect(compiled.querySelector('p').textContent).not.toContain(
       app.user.name
     );
@@ -53,9 +53,9 @@ describe('Component: User', () => {
 
   it(`shouldn't fetch data successfully if not called asynchronously`, () => {
     const { fixture, app } = getFixtureAndApp();
-    let dataService = fixture.debugElement.injector.get(DataService);
+    const dataService = fixture.debugElement.injector.get(DataService);
 
-    let spy = spyOn(dataService, 'getDetails').and.returnValue(
+    const spy = spyOn(dataService, 'getDetails').and.returnValue(
       Promise.resolve('Data')
     );
 
@@ -65,9 +65,9 @@ describe('Component: User', () => {
 
   it(`should fetch data successfully if called asynchronously`, fakeAsync(() => {
     const { fixture, app } = getFixtureAndApp();
-    let dataService = fixture.debugElement.injector.get(DataService);
+    const dataService = fixture.debugElement.injector.get(DataService);
 
-    let spy = spyOn(dataService, 'getDetails').and.returnValue(
+    const spy = spyOn(dataService, 'getDetails').and.returnValue(
       Promise.resolve('Data')
     );
 
